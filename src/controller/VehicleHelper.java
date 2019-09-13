@@ -23,12 +23,6 @@ public class VehicleHelper {
 		
 	}
 	
-	public List<Vehicle> showInventory() {
-		EntityManager em = emfactory.createEntityManager();
-		List<Vehicle> inventory = em.createQuery("SELECT i FROM Vehicle i").getResultList();
-		return inventory;
-	}
-	
 	public void removeVehicle(Vehicle toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
@@ -52,12 +46,7 @@ public class VehicleHelper {
 		em.close();
 	}
 	
-	
-	
-	public void cleanUp() {
-		emfactory.close();
-	}
-
+	//This locates the vehicle sought after by MODEL attribute
 	public List<Vehicle> findVehiclesByModel(String model) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
@@ -89,5 +78,17 @@ public class VehicleHelper {
 		em.close();
 		
 	}
+	
+	// This method returns a list of the vehicles in the inventory table
+		public List<Vehicle> showInventory() {
+			EntityManager em = emfactory.createEntityManager();
+			List<Vehicle> inventory = em.createQuery("SELECT i FROM Vehicle i").getResultList();
+			return inventory;
+		}
+	
+	// This method closes the EntityManagerFactory upon exiting the program
+		public void cleanUp() {
+			emfactory.close();
+		}
 
 }
